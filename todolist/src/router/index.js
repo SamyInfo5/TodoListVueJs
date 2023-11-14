@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../components/TodoList.vue'
+import Home from '@/components/TodoList.vue'
+import TodoItem from '@/components/TodoItem.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -8,6 +9,12 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/task/:index',
+      name: 'task',
+      component: TodoItem,
+      props: true,
     },
   ]
 })

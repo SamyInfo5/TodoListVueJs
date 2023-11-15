@@ -1,9 +1,9 @@
-<template>
-    <div class=" bg-slate-500 h-[100vh] w-full flex flex-col justify-center items-center">
-        <h1 class="text-white text-3xl">Task Details</h1>
-        <input class="text-3xl" v-model="editedValue" type="text" :placeholder="`${selectedItem}`">
-        <RouterLink to="/" @click="editTodo" class="rounded-2xl text-white h-20 w-32 flex justify-center items-center text-4xl bg-blue-500 mt-20">edit</RouterLink>
-    </div>
+<template lang="pug">
+.bg-slate-500.w-full.flex.flex-col.justify-center.items-center(class='h-[100vh]')
+  h1.text-white.text-3xl Task Details
+  input.text-3xl(v-model='editedValue.text' type='text' :placeholder='`${selectedItem}`')
+  RouterLink.rounded-2xl.text-white.h-20.w-32.flex.justify-center.items-center.text-4xl.bg-blue-500.mt-20(to='/' @click='editTodo') edit
+
 </template>
   
 <script setup>

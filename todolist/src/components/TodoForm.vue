@@ -1,6 +1,6 @@
 <template lang="pug">
 .flex.flex-col.justify-center.items-center
-    h1.text-3xl.pt-10 Enter a new Todo
+    span.text-3xl.pt-10 Enter a new Todo
     br
     .form
       input.border-2.rounded.mr-3.w-64.h-10(v-model='newTodo' type='text')
@@ -10,26 +10,29 @@
       button.rounded.mx-4.w-24.h-12.bg-lime-500(@click="filterTodos('finish')") Finish
       button.rounded.mx-4.w-24.h-12.bg-lime-500(@click="filterTodos('notFinish')") Not Finish
     .flex.flex-col.justify-center.items-center.mt-20
-      form.flex.justify-between.border-2.mb-2.w-80.transition-opacity.duration-1000.ease-in-out(v-if='filteredTodos.length > 0' v-for='(item, i) in filteredTodos' :data-log='console.log(todos)')
-        input(type='checkbox' @change='toggleTodoStatus(i)')
-        h1.m-auto {{ item.text }}
+      form.flex.justify-between.border-2.mb-2.w-80.transition-opacity.duration-1000.ease-in-out(v-if='filteredTodos.length > 0' v-for='(item, i) in filteredTodos')
+        input( type='checkbox' @change='toggleTodoStatus(i)')
+        span.m-auto {{ item.text }}
         RouterLink.bg-blue-500.w-10.text-center(:to="{ name: 'task', params: { index: i } }" @click='setSelectedTask(item.text)') edit
         button.bg-red-600.w-16.ml-3(@click='deletetoto(i)') Delete
       div(v-else='')
-        h1 pas de t&acirc;che pour le moments
+        span.text-2xl pas de t&acirc;che pour le moments
 </template>
 
 <script setup>
 import { ref, watchEffect } from "vue";
 import { RouterLink } from "vue-router";
 
+const checkbox = document.getElementById('check')
 const newTodo = ref("");
 const todos = ref(JSON.parse(localStorage.getItem("todos")) || []);
 const selectedItem = ref(null);
 const filter = ref('all')
 
 const addTodo = () => {
-    if (newTodo.value.trim() !== "") {
+    if(newTodo === undefined) return
+        if (newTodo.value.trim() === "") return
+
         const todo = {
             text: newTodo.value,
             completed: false // Nouvelle constante "completed" initialisée à false
@@ -38,8 +41,7 @@ const addTodo = () => {
         todos.value.push(todo);
         newTodo.value = "";
         saveToLocalStorage();
-    }
-};
+    };
 
 const deletetoto = (index) => {
     todos.value.splice(index, 1);

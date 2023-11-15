@@ -1,10 +1,8 @@
-<template>
-  <div>
-  </div>
-  <RouterView />
+<template lang="pug">
+div
+  RouterView  
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import home from '@/components/TodoList.vue'
+import { RouterView } from 'vue-router'
 </script>

@@ -16,7 +16,7 @@ console.log(params.index);
 const todosFromLocalStorage = JSON.parse(localStorage.getItem('todos')) || [];
 console.log(todosFromLocalStorage);
 
-let selectedItem = todosFromLocalStorage.length > 0 ? todosFromLocalStorage[0] : null;
+let selectedItem = todosFromLocalStorage.length > 0 ? todosFromLocalStorage[params.index] : null;
 console.log(selectedItem);
 
 let editedValue = selectedItem;

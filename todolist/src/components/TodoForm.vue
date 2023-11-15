@@ -8,10 +8,10 @@
             <button @click="addTodo" class="bg-green-200 border-2 w-20 h-10">Add</button>
         </div>
 
-        <div class="filter">
-            <button @click="filterTodos('all')">All</button>
-            <button @click="filterTodos('finish')">Finish</button>
-            <button @click="filterTodos('notFinish')">Not Finish</button>
+        <div class="filter pt-10">
+             <button class="rounded  mx-4 w-24 h-12 bg-lime-500" @click="filterTodos('all')">All</button>
+             <button class="rounded  mx-4 w-24 h-12 bg-lime-500" @click="filterTodos('finish')">Finish</button>
+             <button class="rounded  mx-4 w-24 h-12 bg-lime-500" @click="filterTodos('notFinish')">Not Finish</button>
         </div>
 
         <div class="flex flex-col justify-center items-center mt-20">
@@ -71,6 +71,8 @@ const toggleTodoStatus = (index) => {
 const filteredTodos = ref(todos.value);
 
 watchEffect(() => {
+    console.log('Filter changed:', filter.value);
+
     if (filter.value === 'all') {
         filteredTodos.value = todos.value;
     } else if (filter.value === 'finish') {

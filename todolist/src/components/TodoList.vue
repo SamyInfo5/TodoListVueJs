@@ -12,6 +12,5 @@
 </template>
 
 <script setup>
-import TodoItem from './TodoItem.vue';
 import TodoForm from './TodoForm.vue';
 </script>

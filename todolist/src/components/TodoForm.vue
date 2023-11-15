@@ -15,9 +15,9 @@
         </div>
 
         <div class="flex flex-col justify-center items-center mt-20">
-            <form v-if="todos.length > 0" v-for="(item, i) in todos" :data-log="console.log(todos)" class="flex justify-between border-2 mb-2 w-80 transition-opacity duration-1000 ease-in-out">
+            <form v-if="filteredTodos.length > 0" v-for="(item, i) in filteredTodos" :data-log="console.log(todos)" class="flex justify-between border-2 mb-2 w-80 transition-opacity duration-1000 ease-in-out">
                 <input type="checkbox" @change="toggleTodoStatus(i)">
-                <h1 class="m-auto">{{ item }}</h1>
+                <h1 class="m-auto">{{ item.text }}</h1>
                 <RouterLink :to="{ name: 'task', params: { index: i, item: item } }" @click="setSelectedTask(item.text)" class="bg-blue-500 w-10 text-center">edit</RouterLink>
                 <button @click="deletetoto(i)" class="bg-red-600 w-16 ml-3">Delete</button>
             </form>
@@ -39,11 +39,17 @@ const filter = ref('all')
 
 const addTodo = () => {
     if (newTodo.value.trim() !== "") {
-        todos.value.push(newTodo.value);
+        const todo = {
+            text: newTodo.value,
+            completed: false // Nouvelle constante "completed" initialisée à false
+        };
+
+        todos.value.push(todo);
         newTodo.value = "";
         saveToLocalStorage();
     }
 };
+
 const deletetoto = (index) => {
     todos.value.splice(index, 1);
     saveToLocalStorage();
@@ -55,7 +61,6 @@ const saveToLocalStorage = () => {
 
 const setSelectedTask = (task) => {
     selectedItem.value = task;
-    console.log("sel", selectedItem.value);
 };
 
 const filterTodos = (filterType) => {
@@ -69,6 +74,7 @@ const toggleTodoStatus = (index) => {
 };
 
 const filteredTodos = ref(todos.value);
+console.log("filtertodo", filteredTodos)
 
 watchEffect(() => {
     console.log('Filter changed:', filter.value);

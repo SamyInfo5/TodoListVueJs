@@ -23,7 +23,6 @@
 import { ref, watchEffect } from "vue";
 import { RouterLink } from "vue-router";
 
-const checkbox = document.getElementById('check')
 const newTodo = ref("");
 const todos = ref(JSON.parse(localStorage.getItem("todos")) || []);
 const selectedItem = ref(null);
